@@ -1,6 +1,5 @@
 ---
 # tasks file for tomcatinstall
-- hosts: "{{hosts_list}}"
 - name: update catch 
   apt:
    update_cache: yes
