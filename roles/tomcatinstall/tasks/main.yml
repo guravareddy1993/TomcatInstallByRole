@@ -1,0 +1,29 @@
+---
+# tasks file for tomcatinstall
+- hosts: "{{hosts_list}}"
+- name: update catch 
+  apt:
+   update_cache: yes
+- name: install default jdk
+  apt:
+    name: default-jdk
+    state: present
+
+- name: Ensure group "tomcat" exists
+  group:
+    name: tomcat
+    state: present 
+- name: addeing tomcat user to tomcat group
+  user:
+    name: tomcat
+    shell: /bin/false
+    groups: tomcat
+    home: /opt/tomcat 
+- name: download tomcat to /opt/tomcat
+  unarchive:
+    src: http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.37/bin/apache-tomcat-8.5.37.tar.gz
+    dest: /opt/tomcat
+    copy : no
+    remote_src: yes
+    group: tomcat
+    owner: tomcat       
